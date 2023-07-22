@@ -53,9 +53,6 @@ dkms.conf
 
 #Added by Petrigh
 Debug/
-Project Backups/
-Proteus/*.workspace
-Code/TP3-CDyM/.vs/
-Code/TP3-CDyM/.vs/Debug/
 .vs/
-.vs/TP3-CDyM/v14
+*.cproj
+*.xml
