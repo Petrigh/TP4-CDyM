@@ -56,3 +56,5 @@ Debug/
 .vs/
 *.cproj
 *.xml
+*.workspace
+Project Backups/
