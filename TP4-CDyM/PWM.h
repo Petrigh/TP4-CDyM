@@ -7,6 +7,6 @@
 #include <avr/interrupt.h>
 
 void setupPWM(void);
-void setupTimer1CTC(void);
+void setupTimer1CTC(uint16_t);
 
 #endif /* PWM_H_ */
