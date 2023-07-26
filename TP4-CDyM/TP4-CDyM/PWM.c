@@ -9,7 +9,7 @@
 #define PWM_START DDRB |=(1<<PORTB1)
 
 
-char uint8_t PWM_DELTA = 0;
+static uint8_t PWM_DELTA = 0;
 volatile uint8_t ocrValue = 0;
 volatile uint8_t adjustLED = 0;
 
