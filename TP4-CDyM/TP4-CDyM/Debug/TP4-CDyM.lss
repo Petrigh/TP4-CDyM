@@ -3,31 +3,31 @@ TP4-CDyM.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000031c  2**0
+  0 .data         00000000  00800100  00800100  000003f2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000002a8  00000000  00000000  00000074  2**1
+  1 .text         0000037e  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000004  00800100  00800100  0000031c  2**0
+  2 .bss          00000009  00800100  00800100  000003f2  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000031c  2**0
+  3 .comment      00000030  00000000  00000000  000003f2  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000034c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000424  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000090  00000000  00000000  0000038c  2**0
+  5 .debug_aranges 00000098  00000000  00000000  00000464  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000098b  00000000  00000000  0000041c  2**0
+  6 .debug_info   000009fa  00000000  00000000  000004fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000007c7  00000000  00000000  00000da7  2**0
+  7 .debug_abbrev 000007b2  00000000  00000000  00000ef6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000004ce  00000000  00000000  0000156e  2**0
+  8 .debug_line   00000564  00000000  00000000  000016a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000015c  00000000  00000000  00001a3c  2**2
+  9 .debug_frame  0000016c  00000000  00000000  00001c0c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000042b  00000000  00000000  00001b98  2**0
+ 10 .debug_str    0000044a  00000000  00000000  00001d78  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000214  00000000  00000000  00001fc3  2**0
+ 11 .debug_loc    000001c4  00000000  00000000  000021c2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000060  00000000  00000000  000021d7  2**0
+ 12 .debug_ranges 00000068  00000000  00000000  00002386  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -40,14 +40,14 @@ Disassembly of section .text:
   10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 90 01 	jmp	0x320	; 0x320 <__vector_7>
   20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-  2c:	0c 94 2e 01 	jmp	0x25c	; 0x25c <__vector_11>
-  30:	0c 94 e6 00 	jmp	0x1cc	; 0x1cc <__vector_12>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 59 01 	jmp	0x2b2	; 0x2b2 <__vector_14>
   3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
@@ -78,398 +78,525 @@ Disassembly of section .text:
   7c:	1d 92       	st	X+, r1
 
 0000007e <.do_clear_bss_start>:
-  7e:	a4 30       	cpi	r26, 0x04	; 4
+  7e:	a9 30       	cpi	r26, 0x09	; 9
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
-  84:	0e 94 78 00 	call	0xf0	; 0xf0 <main>
-  88:	0c 94 52 01 	jmp	0x2a4	; 0x2a4 <_exit>
+  84:	0e 94 75 00 	call	0xea	; 0xea <main>
+  88:	0c 94 bd 01 	jmp	0x37a	; 0x37a <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <initADC>:
-#include "ADC.h"
-
 void initADC() {
 	// Configurar el pin del LED como salida.
-	DDRB |= (1 << DDB5);
-  90:	84 b1       	in	r24, 0x04	; 4
-  92:	80 62       	ori	r24, 0x20	; 32
-  94:	84 b9       	out	0x04, r24	; 4
+	//DDRB |= (1 << DDB5);
+	
+	// Habilitar el ADC y configurar el preescalador a 64 (125 kHz a 8 MHz de frecuencia de reloj).
+	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (0 << ADPS0);
+  90:	ea e7       	ldi	r30, 0x7A	; 122
+  92:	f0 e0       	ldi	r31, 0x00	; 0
+  94:	80 81       	ld	r24, Z
+  96:	86 68       	ori	r24, 0x86	; 134
+  98:	80 83       	st	Z, r24
 	
 	// Configurar la referencia de voltaje del ADC a AVCC con ajuste a la izquierda.
 	ADMUX |=  (0 << REFS1) | (1 << REFS0);
-  96:	ec e7       	ldi	r30, 0x7C	; 124
-  98:	f0 e0       	ldi	r31, 0x00	; 0
-  9a:	80 81       	ld	r24, Z
-  9c:	80 64       	ori	r24, 0x40	; 64
-  9e:	80 83       	st	Z, r24
+  9a:	ec e7       	ldi	r30, 0x7C	; 124
+  9c:	f0 e0       	ldi	r31, 0x00	; 0
+  9e:	80 81       	ld	r24, Z
+  a0:	80 64       	ori	r24, 0x40	; 64
+  a2:	80 83       	st	Z, r24
 	ADMUX &= ~(1 << ADLAR);
-  a0:	80 81       	ld	r24, Z
-  a2:	8f 7d       	andi	r24, 0xDF	; 223
-  a4:	80 83       	st	Z, r24
+  a4:	80 81       	ld	r24, Z
+  a6:	8f 7d       	andi	r24, 0xDF	; 223
+  a8:	80 83       	st	Z, r24
+  aa:	08 95       	ret
 
-	// Habilitar el ADC y configurar el preescalador a 64 (125 kHz a 8 MHz de frecuencia de reloj).
-	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (0 << ADPS0);
-  a6:	ea e7       	ldi	r30, 0x7A	; 122
-  a8:	f0 e0       	ldi	r31, 0x00	; 0
-  aa:	80 81       	ld	r24, Z
-  ac:	86 68       	ori	r24, 0x86	; 134
-  ae:	80 83       	st	Z, r24
-  b0:	08 95       	ret
+000000ac <leerADC_canal3>:
 
-000000b2 <leerADC_canal3>:
 }
 
 uint16_t leerADC_canal3() {
 	// Seleccionar el canal 3 del ADC (PIN A3).
 	ADMUX &= 0xF0; // Limpiar los bits MUX4:0 para configurarlos en 0.
-  b2:	ec e7       	ldi	r30, 0x7C	; 124
-  b4:	f0 e0       	ldi	r31, 0x00	; 0
-  b6:	80 81       	ld	r24, Z
-  b8:	80 7f       	andi	r24, 0xF0	; 240
-  ba:	80 83       	st	Z, r24
+  ac:	ec e7       	ldi	r30, 0x7C	; 124
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	80 81       	ld	r24, Z
+  b2:	80 7f       	andi	r24, 0xF0	; 240
+  b4:	80 83       	st	Z, r24
 	ADMUX |= 0x03; // Establecer los bits MUX4:0 en 011 para seleccionar el canal 3 (PIN A3).
-  bc:	80 81       	ld	r24, Z
-  be:	83 60       	ori	r24, 0x03	; 3
-  c0:	80 83       	st	Z, r24
+  b6:	80 81       	ld	r24, Z
+  b8:	83 60       	ori	r24, 0x03	; 3
+  ba:	80 83       	st	Z, r24
 
 	// Iniciar una conversión ADC.
 	ADCSRA |= (1 << ADSC);
-  c2:	ea e7       	ldi	r30, 0x7A	; 122
-  c4:	f0 e0       	ldi	r31, 0x00	; 0
-  c6:	80 81       	ld	r24, Z
-  c8:	80 64       	ori	r24, 0x40	; 64
-  ca:	80 83       	st	Z, r24
+  bc:	ea e7       	ldi	r30, 0x7A	; 122
+  be:	f0 e0       	ldi	r31, 0x00	; 0
+  c0:	80 81       	ld	r24, Z
+  c2:	80 64       	ori	r24, 0x40	; 64
+  c4:	80 83       	st	Z, r24
 
 	// Esperar hasta que se complete la conversión.
 	while ((ADCSRA & (1 << ADIF))==0);
-  cc:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
-  d0:	84 ff       	sbrs	r24, 4
-  d2:	fc cf       	rjmp	.-8      	; 0xcc <leerADC_canal3+0x1a>
+  c6:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+  ca:	84 ff       	sbrs	r24, 4
+  cc:	fc cf       	rjmp	.-8      	; 0xc6 <leerADC_canal3+0x1a>
 	
 	//Limpia el flag ADIF
 	ADCSRA |= (1<<ADIF);
-  d4:	ea e7       	ldi	r30, 0x7A	; 122
-  d6:	f0 e0       	ldi	r31, 0x00	; 0
-  d8:	80 81       	ld	r24, Z
-  da:	80 61       	ori	r24, 0x10	; 16
-  dc:	80 83       	st	Z, r24
+  ce:	ea e7       	ldi	r30, 0x7A	; 122
+  d0:	f0 e0       	ldi	r31, 0x00	; 0
+  d2:	80 81       	ld	r24, Z
+  d4:	80 61       	ori	r24, 0x10	; 16
+  d6:	80 83       	st	Z, r24
 
 	// Leer y retornar el resultado de la conversión.
 	uint8_t lowByte = ADCL;
-  de:	20 91 78 00 	lds	r18, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+  d8:	20 91 78 00 	lds	r18, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
 	uint8_t highByte = ADCH;
-  e2:	80 91 79 00 	lds	r24, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+  dc:	80 91 79 00 	lds	r24, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
 	uint16_t valorADC = (highByte << 8) | lowByte;
-  e6:	90 e0       	ldi	r25, 0x00	; 0
-  e8:	98 2f       	mov	r25, r24
-  ea:	88 27       	eor	r24, r24
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	98 2f       	mov	r25, r24
+  e4:	88 27       	eor	r24, r24
 
 	Para obtener el resultado de la conversión de 10 bits (0 a 1023), primero se lee el valor de ADCL y luego se lee el valor de ADCH. El valor de ADCH 
 	contiene los 2 bits más significativos de la conversión de 10 bits, mientras que el valor de ADCL contiene los 8 bits menos significativos. 
 	Estos dos valores se combinan para obtener el resultado de la conversión de 10 bits.
 	*/
-  ec:	82 2b       	or	r24, r18
-  ee:	08 95       	ret
+  e6:	82 2b       	or	r24, r18
+  e8:	08 95       	ret
 
-000000f0 <main>:
+000000ea <main>:
 #include "ADC.h"
+#define F_CPU 16000000UL
 
 int main(void)
 {	
-	uint16_t valorLDR;
 	initADC();
-  f0:	0e 94 48 00 	call	0x90	; 0x90 <initADC>
+  ea:	0e 94 48 00 	call	0x90	; 0x90 <initADC>
 	setupPWM();
-  f4:	0e 94 90 00 	call	0x120	; 0x120 <setupPWM>
-	setupTimer1CTC(1562);  //1562 = 2seg parpadeo; 3905 = 5seg parpadeo;
-  f8:	8a e1       	ldi	r24, 0x1A	; 26
-  fa:	96 e0       	ldi	r25, 0x06	; 6
-  fc:	0e 94 ce 00 	call	0x19c	; 0x19c <setupTimer1CTC>
+  ee:	0e 94 8f 00 	call	0x11e	; 0x11e <setupPWM>
+	setupTimer0CTC();
+  f2:	0e 94 34 01 	call	0x268	; 0x268 <setupTimer0CTC>
+	setupTimer2CTC();
+  f6:	0e 94 7d 01 	call	0x2fa	; 0x2fa <setupTimer2CTC>
 	sei();
- 100:	78 94       	sei
+  fa:	78 94       	sei
 	
 	while (1)
-	{	
+	{
 		valorLDR = leerADC_canal3();
- 102:	0e 94 59 00 	call	0xb2	; 0xb2 <leerADC_canal3>
-		if (valorLDR == 1024){
- 106:	81 15       	cp	r24, r1
- 108:	94 40       	sbci	r25, 0x04	; 4
- 10a:	29 f4       	brne	.+10     	; 0x116 <main+0x26>
-			setupTimer1CTC(3905);
- 10c:	81 e4       	ldi	r24, 0x41	; 65
- 10e:	9f e0       	ldi	r25, 0x0F	; 15
- 110:	0e 94 ce 00 	call	0x19c	; 0x19c <setupTimer1CTC>
- 114:	f6 cf       	rjmp	.-20     	; 0x102 <main+0x12>
+  fc:	0e 94 56 00 	call	0xac	; 0xac <leerADC_canal3>
+ 100:	90 93 06 01 	sts	0x0106, r25	; 0x800106 <valorLDR+0x1>
+ 104:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <valorLDR>
+		if (valorLDR <= 1000){
+ 108:	89 3e       	cpi	r24, 0xE9	; 233
+ 10a:	93 40       	sbci	r25, 0x03	; 3
+ 10c:	20 f4       	brcc	.+8      	; 0x116 <main+0x2c>
+			haltTop = 1; // 2 seg
+ 10e:	81 e0       	ldi	r24, 0x01	; 1
+ 110:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <haltTop>
+ 114:	f3 cf       	rjmp	.-26     	; 0xfc <main+0x12>
 		} else {
-			setupTimer1CTC(1562);
- 116:	8a e1       	ldi	r24, 0x1A	; 26
- 118:	96 e0       	ldi	r25, 0x06	; 6
- 11a:	0e 94 ce 00 	call	0x19c	; 0x19c <setupTimer1CTC>
- 11e:	f1 cf       	rjmp	.-30     	; 0x102 <main+0x12>
+			haltTop = 6; // 5 seg
+ 116:	86 e0       	ldi	r24, 0x06	; 6
+ 118:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <haltTop>
+ 11c:	ef cf       	rjmp	.-34     	; 0xfc <main+0x12>
 
-00000120 <setupPWM>:
+0000011e <setupPWM>:
 volatile uint8_t adjustLED = 0;
-
+void PWM_soft_Update(void);
 
 void setupPWM() {
-	// Configuración para Timer0 canal A (LED rojo) y canal B (LED verde)
-	DDRD |= (1 << PORTD6) | (1 << PORTD5); //Canal OCR0A y OCR0B
- 120:	8a b1       	in	r24, 0x0a	; 10
- 122:	80 66       	ori	r24, 0x60	; 96
- 124:	8a b9       	out	0x0a, r24	; 10
-	OCR0A = 0x00;
- 126:	17 bc       	out	0x27, r1	; 39
-	OCR0B = 0x00;
- 128:	18 bc       	out	0x28, r1	; 40
-	TCCR0A |= (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0A0) | (1 << COM0B1) | (1 << COM0B0); // Modo PWM invertido de 8 bits, Fast PWM en OC0A y OC0B
- 12a:	84 b5       	in	r24, 0x24	; 36
- 12c:	83 6f       	ori	r24, 0xF3	; 243
- 12e:	84 bd       	out	0x24, r24	; 36
-	TCCR0B |= (1 << CS02); // preescalador de 256; frecuencia de 122Hz
- 130:	85 b5       	in	r24, 0x25	; 37
- 132:	84 60       	ori	r24, 0x04	; 4
- 134:	85 bd       	out	0x25, r24	; 37
+	// Configuración para Timer1 canal A (LED azul) y canal B (LED verde)
+	DDRB |= (1 << PORTB1) | (1 << PORTB2); //Canal OCR0A y OCR0B
+ 11e:	84 b1       	in	r24, 0x04	; 4
+ 120:	86 60       	ori	r24, 0x06	; 6
+ 122:	84 b9       	out	0x04, r24	; 4
+	OCR1A = 0xFF; //Arranca apagado
+ 124:	8f ef       	ldi	r24, 0xFF	; 255
+ 126:	90 e0       	ldi	r25, 0x00	; 0
+ 128:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 12c:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+	OCR1B = 0xFF; //Arranca apagado
+ 130:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 134:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+	TCCR1A |= (1 << WGM10) | (1 << WGM10) | (1 << COM1A1) | (1 << COM1B1); // Modo PWM no-invertido de 8 bits en OC1A y OC1B
+ 138:	e0 e8       	ldi	r30, 0x80	; 128
+ 13a:	f0 e0       	ldi	r31, 0x00	; 0
+ 13c:	80 81       	ld	r24, Z
+ 13e:	81 6a       	ori	r24, 0xA1	; 161
+ 140:	80 83       	st	Z, r24
+	TCCR1B |= (1 << WGM12) | (1 << CS12); // preescalador de 256; frecuencia de 122Hz
+ 142:	e1 e8       	ldi	r30, 0x81	; 129
+ 144:	f0 e0       	ldi	r31, 0x00	; 0
+ 146:	80 81       	ld	r24, Z
+ 148:	8c 60       	ori	r24, 0x0C	; 12
+ 14a:	80 83       	st	Z, r24
+	//configuracion Mef
+	stateFlag = UP;
+ 14c:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <stateFlag>
+	haltTop = 1;
+ 150:	81 e0       	ldi	r24, 0x01	; 1
+ 152:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <haltTop>
 	//Setup del PWM por soft
 	PWM_START;
- 136:	84 b1       	in	r24, 0x04	; 4
- 138:	82 60       	ori	r24, 0x02	; 2
- 13a:	84 b9       	out	0x04, r24	; 4
+ 156:	84 b1       	in	r24, 0x04	; 4
+ 158:	80 62       	ori	r24, 0x20	; 32
+ 15a:	84 b9       	out	0x04, r24	; 4
 	PWM_OFF;
- 13c:	85 b1       	in	r24, 0x05	; 5
- 13e:	8d 7f       	andi	r24, 0xFD	; 253
- 140:	85 b9       	out	0x05, r24	; 5
- 142:	08 95       	ret
+ 15c:	85 b1       	in	r24, 0x05	; 5
+ 15e:	80 62       	ori	r24, 0x20	; 32
+ 160:	85 b9       	out	0x05, r24	; 5
+ 162:	08 95       	ret
 
-00000144 <setRGBColor>:
-
+00000164 <setRGBColor>:
 }
 
-void setRGBColor() {
-	if (adjustLED <= 20){ //Se prende
- 144:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <adjustLED>
- 148:	85 31       	cpi	r24, 0x15	; 21
- 14a:	a0 f4       	brcc	.+40     	; 0x174 <setRGBColor+0x30>
-		// Ajustar brillo del LED rojo
-		ocrValue = OCR0A + REDSHADE;
- 14c:	87 b5       	in	r24, 0x27	; 39
- 14e:	89 5e       	subi	r24, 0xE9	; 233
- 150:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <ocrValue>
-		OCR0A = ocrValue;
- 154:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <ocrValue>
- 158:	87 bd       	out	0x27, r24	; 39
-
-		// Ajustar brillo del LED verde
-		ocrValue = OCR0A + GREENSHADE;
- 15a:	87 b5       	in	r24, 0x27	; 39
- 15c:	8e 5f       	subi	r24, 0xFE	; 254
- 15e:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <ocrValue>
-		OCR0B = ocrValue;
- 162:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <ocrValue>
- 166:	88 bd       	out	0x28, r24	; 40
+void setRGBColor() {	
+	switch(stateFlag){
+ 164:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <stateFlag>
+ 168:	81 30       	cpi	r24, 0x01	; 1
+ 16a:	51 f1       	breq	.+84     	; 0x1c0 <setRGBColor+0x5c>
+ 16c:	30 f0       	brcs	.+12     	; 0x17a <setRGBColor+0x16>
+ 16e:	82 30       	cpi	r24, 0x02	; 2
+ 170:	c1 f1       	breq	.+112    	; 0x1e2 <setRGBColor+0x7e>
+ 172:	83 30       	cpi	r24, 0x03	; 3
+ 174:	09 f4       	brne	.+2      	; 0x178 <setRGBColor+0x14>
+ 176:	58 c0       	rjmp	.+176    	; 0x228 <setRGBColor+0xc4>
+ 178:	08 95       	ret
+		case UP:
+			
+			// Ajustar brillo del LED azul
+			ocrValue = OCR1A - BLUESHADE;
+ 17a:	e8 e8       	ldi	r30, 0x88	; 136
+ 17c:	f0 e0       	ldi	r31, 0x00	; 0
+ 17e:	80 81       	ld	r24, Z
+ 180:	91 81       	ldd	r25, Z+1	; 0x01
+ 182:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <ocrValue>
+			OCR1A = ocrValue;
+ 186:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <ocrValue>
+ 18a:	90 e0       	ldi	r25, 0x00	; 0
+ 18c:	91 83       	std	Z+1, r25	; 0x01
+ 18e:	80 83       	st	Z, r24
+			// Ajustar brillo del LED verde
+			ocrValue = OCR1B - GREENSHADE;
+ 190:	ea e8       	ldi	r30, 0x8A	; 138
+ 192:	f0 e0       	ldi	r31, 0x00	; 0
+ 194:	80 81       	ld	r24, Z
+ 196:	91 81       	ldd	r25, Z+1	; 0x01
+ 198:	81 50       	subi	r24, 0x01	; 1
+ 19a:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <ocrValue>
+			OCR1B = ocrValue;
+ 19e:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <ocrValue>
+ 1a2:	90 e0       	ldi	r25, 0x00	; 0
+ 1a4:	91 83       	std	Z+1, r25	; 0x01
+ 1a6:	80 83       	st	Z, r24
+			// Ajustar brillo del LED rojo
+			PWM_DELTA -= REDSHADE;
+ 1a8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <PWM_DELTA>
+ 1ac:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <PWM_DELTA>
+			
+			if(!fader){
+ 1b0:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <fader>
+ 1b4:	81 11       	cpse	r24, r1
+ 1b6:	57 c0       	rjmp	.+174    	; 0x266 <setRGBColor+0x102>
+				stateFlag = HOLD;
+ 1b8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ba:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <stateFlag>
+ 1be:	08 95       	ret
+			}
+		break;
 		
-		// Ajustar brillo del LED azul
-		PWM_DELTA += BLUESHADE;
- 168:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <PWM_DELTA>
- 16c:	84 5f       	subi	r24, 0xF4	; 244
- 16e:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <PWM_DELTA>
- 172:	08 95       	ret
-	}else{ //Se apaga
-		// Ajustar brillo del LED rojo
-		ocrValue = OCR0A - REDSHADE;
- 174:	87 b5       	in	r24, 0x27	; 39
- 176:	87 51       	subi	r24, 0x17	; 23
- 178:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <ocrValue>
-		OCR0A = ocrValue;
- 17c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <ocrValue>
- 180:	87 bd       	out	0x27, r24	; 39
+		case HOLD:
+			if(!fader){
+ 1c0:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <fader>
+ 1c4:	81 11       	cpse	r24, r1
+ 1c6:	4f c0       	rjmp	.+158    	; 0x266 <setRGBColor+0x102>
+				if(++count == 2){
+ 1c8:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <count>
+ 1cc:	8f 5f       	subi	r24, 0xFF	; 255
+ 1ce:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <count>
+ 1d2:	82 30       	cpi	r24, 0x02	; 2
+ 1d4:	09 f0       	breq	.+2      	; 0x1d8 <setRGBColor+0x74>
+ 1d6:	47 c0       	rjmp	.+142    	; 0x266 <setRGBColor+0x102>
+					stateFlag = DOWN;
+ 1d8:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <stateFlag>
+					count=0;
+ 1dc:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <count>
+ 1e0:	08 95       	ret
+		
+		case DOWN:
+			
+			
+			// Ajustar brillo del LED azul
+			ocrValue = OCR1A + BLUESHADE;
+ 1e2:	e8 e8       	ldi	r30, 0x88	; 136
+ 1e4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e6:	80 81       	ld	r24, Z
+ 1e8:	91 81       	ldd	r25, Z+1	; 0x01
+ 1ea:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <ocrValue>
+			OCR1A = ocrValue;
+ 1ee:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <ocrValue>
+ 1f2:	90 e0       	ldi	r25, 0x00	; 0
+ 1f4:	91 83       	std	Z+1, r25	; 0x01
+ 1f6:	80 83       	st	Z, r24
+			// Ajustar brillo del LED verde
+			ocrValue = OCR1B + GREENSHADE;
+ 1f8:	ea e8       	ldi	r30, 0x8A	; 138
+ 1fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fc:	80 81       	ld	r24, Z
+ 1fe:	91 81       	ldd	r25, Z+1	; 0x01
+ 200:	8f 5f       	subi	r24, 0xFF	; 255
+ 202:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <ocrValue>
+			OCR1B = ocrValue;
+ 206:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <ocrValue>
+ 20a:	90 e0       	ldi	r25, 0x00	; 0
+ 20c:	91 83       	std	Z+1, r25	; 0x01
+ 20e:	80 83       	st	Z, r24
+			// Ajustar brillo del LED rojo
+			PWM_DELTA += REDSHADE;
+ 210:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <PWM_DELTA>
+ 214:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <PWM_DELTA>
+			
+			
+			if(!fader){
+ 218:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <fader>
+ 21c:	81 11       	cpse	r24, r1
+ 21e:	23 c0       	rjmp	.+70     	; 0x266 <setRGBColor+0x102>
+				stateFlag = OFF;
+ 220:	83 e0       	ldi	r24, 0x03	; 3
+ 222:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <stateFlag>
+ 226:	08 95       	ret
+		break;
+		
+		case OFF:
+		
+				//TCCR0B &= ~(1<<CS02); //apago Timer0
+				TCCR1B &= ~(1<<CS12); //apago Timer1
+ 228:	e1 e8       	ldi	r30, 0x81	; 129
+ 22a:	f0 e0       	ldi	r31, 0x00	; 0
+ 22c:	80 81       	ld	r24, Z
+ 22e:	8b 7f       	andi	r24, 0xFB	; 251
+ 230:	80 83       	st	Z, r24
+				PORTB |= (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5); //Enciendo LEDs
+ 232:	85 b1       	in	r24, 0x05	; 5
+ 234:	86 62       	ori	r24, 0x26	; 38
+ 236:	85 b9       	out	0x05, r24	; 5
+			
+			if(!fader){
+ 238:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <fader>
+ 23c:	81 11       	cpse	r24, r1
+ 23e:	13 c0       	rjmp	.+38     	; 0x266 <setRGBColor+0x102>
+				if(++count == haltTop){
+ 240:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <count>
+ 244:	8f 5f       	subi	r24, 0xFF	; 255
+ 246:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <count>
+ 24a:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <haltTop>
+ 24e:	89 13       	cpse	r24, r25
+ 250:	0a c0       	rjmp	.+20     	; 0x266 <setRGBColor+0x102>
+					stateFlag = UP;
+ 252:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <stateFlag>
+					count = 0;
+ 256:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <count>
+					//TCCR0B |= (1<<CS02); //Enciendo Timer0
+					TCCR1B |= (1<<CS12); //Enciendo Timer1
+ 25a:	80 81       	ld	r24, Z
+ 25c:	84 60       	ori	r24, 0x04	; 4
+ 25e:	80 83       	st	Z, r24
+					PORTB &= ~(1<<PORTB1) & ~(1<<PORTB2) & ~(1<<PORTB5); //Apago LEDs
+ 260:	85 b1       	in	r24, 0x05	; 5
+ 262:	89 7d       	andi	r24, 0xD9	; 217
+ 264:	85 b9       	out	0x05, r24	; 5
+ 266:	08 95       	ret
 
-		// Ajustar brillo del LED verde
-		ocrValue = OCR0A - GREENSHADE;
- 182:	87 b5       	in	r24, 0x27	; 39
- 184:	82 50       	subi	r24, 0x02	; 2
- 186:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <ocrValue>
-		OCR0B = ocrValue;
- 18a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <ocrValue>
- 18e:	88 bd       	out	0x28, r24	; 40
-
-		// Ajustar brillo del LED azul
-		PWM_DELTA -= BLUESHADE;
- 190:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <PWM_DELTA>
- 194:	8c 50       	subi	r24, 0x0C	; 12
- 196:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <PWM_DELTA>
- 19a:	08 95       	ret
-
-0000019c <setupTimer1CTC>:
+00000268 <setupTimer0CTC>:
 	}
 }
 
-void setupTimer1CTC(uint16_t outputCompare) { //outputCompare -> 1562 = 50ms; 3905 = 125ms;
- 19c:	9c 01       	movw	r18, r24
+void setupTimer0CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
-	TCCR1A = 0; // Desactivar las salidas en modo CTC
- 19e:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
-	TCCR1B |= (1 << WGM12) | (1 << CS12); // Modo CTC con prescaler 256
- 1a2:	e1 e8       	ldi	r30, 0x81	; 129
- 1a4:	f0 e0       	ldi	r31, 0x00	; 0
- 1a6:	90 81       	ld	r25, Z
- 1a8:	9c 60       	ori	r25, 0x0C	; 12
- 1aa:	90 83       	st	Z, r25
-	OCR1B = outputCompare; // Interrupción cada 50 ms o cada 125 ms
- 1ac:	30 93 8b 00 	sts	0x008B, r19	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
- 1b0:	20 93 8a 00 	sts	0x008A, r18	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
-	OCR1A = 499; // Interrupción cada 16 ms (60Hz)
- 1b4:	83 ef       	ldi	r24, 0xF3	; 243
- 1b6:	91 e0       	ldi	r25, 0x01	; 1
- 1b8:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- 1bc:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
-	TIMSK1 |= (1 << OCIE1B) | (1 << OCIE1A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
- 1c0:	ef e6       	ldi	r30, 0x6F	; 111
- 1c2:	f0 e0       	ldi	r31, 0x00	; 0
- 1c4:	80 81       	ld	r24, Z
- 1c6:	86 60       	ori	r24, 0x06	; 6
- 1c8:	80 83       	st	Z, r24
- 1ca:	08 95       	ret
+	TCCR0A |= (1 << WGM01); // Seteo Modo CTC
+ 268:	84 b5       	in	r24, 0x24	; 36
+ 26a:	82 60       	ori	r24, 0x02	; 2
+ 26c:	84 bd       	out	0x24, r24	; 36
+	TCCR0B |= (1 << CS02); // Prescaler 256
+ 26e:	85 b5       	in	r24, 0x25	; 37
+ 270:	84 60       	ori	r24, 0x04	; 4
+ 272:	85 bd       	out	0x25, r24	; 37
+	OCR0A = 120; // Interrupción cada 2 ms (500Hz)
+ 274:	88 e7       	ldi	r24, 0x78	; 120
+ 276:	87 bd       	out	0x27, r24	; 39
+	TIMSK0 |= (1 << OCIE0A) ;//| (1 << OCIE0A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+ 278:	ee e6       	ldi	r30, 0x6E	; 110
+ 27a:	f0 e0       	ldi	r31, 0x00	; 0
+ 27c:	80 81       	ld	r24, Z
+ 27e:	82 60       	ori	r24, 0x02	; 2
+ 280:	80 83       	st	Z, r24
+ 282:	08 95       	ret
 
-000001cc <__vector_12>:
-}
-
-// Interrupción del Timer1 (CTC)
-ISR(TIMER1_COMPB_vect) {
- 1cc:	1f 92       	push	r1
- 1ce:	0f 92       	push	r0
- 1d0:	0f b6       	in	r0, 0x3f	; 63
- 1d2:	0f 92       	push	r0
- 1d4:	11 24       	eor	r1, r1
- 1d6:	2f 93       	push	r18
- 1d8:	3f 93       	push	r19
- 1da:	4f 93       	push	r20
- 1dc:	5f 93       	push	r21
- 1de:	6f 93       	push	r22
- 1e0:	7f 93       	push	r23
- 1e2:	8f 93       	push	r24
- 1e4:	9f 93       	push	r25
- 1e6:	af 93       	push	r26
- 1e8:	bf 93       	push	r27
- 1ea:	ef 93       	push	r30
- 1ec:	ff 93       	push	r31
-	adjustLED++;
- 1ee:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <adjustLED>
- 1f2:	8f 5f       	subi	r24, 0xFF	; 255
- 1f4:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <adjustLED>
-	setRGBColor(); // Alterar el estado del LED
- 1f8:	0e 94 a2 00 	call	0x144	; 0x144 <setRGBColor>
-	if(adjustLED>=40){
- 1fc:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <adjustLED>
- 200:	88 32       	cpi	r24, 0x28	; 40
- 202:	10 f0       	brcs	.+4      	; 0x208 <__vector_12+0x3c>
-		adjustLED=0;
- 204:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <adjustLED>
-	}
-}
- 208:	ff 91       	pop	r31
- 20a:	ef 91       	pop	r30
- 20c:	bf 91       	pop	r27
- 20e:	af 91       	pop	r26
- 210:	9f 91       	pop	r25
- 212:	8f 91       	pop	r24
- 214:	7f 91       	pop	r23
- 216:	6f 91       	pop	r22
- 218:	5f 91       	pop	r21
- 21a:	4f 91       	pop	r20
- 21c:	3f 91       	pop	r19
- 21e:	2f 91       	pop	r18
- 220:	0f 90       	pop	r0
- 222:	0f be       	out	0x3f, r0	; 63
- 224:	0f 90       	pop	r0
- 226:	1f 90       	pop	r1
- 228:	18 95       	reti
-
-0000022a <PWM_soft_Update>:
+00000284 <PWM_soft_Update>:
 
 //PWM por Software
 void PWM_soft_Update(void){
-	static uint8_t PWM_position = 0;
+	volatile	static uint8_t PWM_position = 0;
 	
-	if(++PWM_position>=PWM_DELTA){
- 22a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 22e:	8f 5f       	subi	r24, 0xFF	; 255
- 230:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
- 234:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <PWM_DELTA>
- 238:	89 17       	cp	r24, r25
- 23a:	30 f0       	brcs	.+12     	; 0x248 <PWM_soft_Update+0x1e>
+	if(++PWM_position>=PWM_PERDIOD){
+ 284:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 288:	8f 5f       	subi	r24, 0xFF	; 255
+ 28a:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 28e:	8f 3f       	cpi	r24, 0xFF	; 255
+ 290:	31 f4       	brne	.+12     	; 0x29e <PWM_soft_Update+0x1a>
 		PWM_position=0;
- 23c:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
-		PWM_OFF;
- 240:	85 b1       	in	r24, 0x05	; 5
- 242:	8d 7f       	andi	r24, 0xFD	; 253
- 244:	85 b9       	out	0x05, r24	; 5
- 246:	08 95       	ret
-	}else{
-		if(PWM_position<PWM_DELTA){
- 248:	89 17       	cp	r24, r25
- 24a:	20 f4       	brcc	.+8      	; 0x254 <PWM_soft_Update+0x2a>
-			PWM_ON;
- 24c:	85 b1       	in	r24, 0x05	; 5
- 24e:	82 60       	ori	r24, 0x02	; 2
- 250:	85 b9       	out	0x05, r24	; 5
- 252:	08 95       	ret
-		}else{
+ 292:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+		PWM_ON;
+ 296:	85 b1       	in	r24, 0x05	; 5
+ 298:	8f 7d       	andi	r24, 0xDF	; 223
+ 29a:	85 b9       	out	0x05, r24	; 5
+ 29c:	08 95       	ret
+	}
+	else{
+		if(PWM_position > PWM_DELTA){
+ 29e:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 2a2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <PWM_DELTA>
+ 2a6:	89 17       	cp	r24, r25
+ 2a8:	18 f4       	brcc	.+6      	; 0x2b0 <PWM_soft_Update+0x2c>
 			PWM_OFF;
- 254:	85 b1       	in	r24, 0x05	; 5
- 256:	8d 7f       	andi	r24, 0xFD	; 253
- 258:	85 b9       	out	0x05, r24	; 5
- 25a:	08 95       	ret
+ 2aa:	85 b1       	in	r24, 0x05	; 5
+ 2ac:	80 62       	ori	r24, 0x20	; 32
+ 2ae:	85 b9       	out	0x05, r24	; 5
+ 2b0:	08 95       	ret
 
-0000025c <__vector_11>:
-		adjustLED=0;
+000002b2 <__vector_14>:
+	OCR0A = 120; // Interrupción cada 2 ms (500Hz)
+	TIMSK0 |= (1 << OCIE0A) ;//| (1 << OCIE0A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+}
+
+// Interrupción del Timer0 para el PWM por Soft
+ISR(TIMER0_COMPA_vect) {
+ 2b2:	1f 92       	push	r1
+ 2b4:	0f 92       	push	r0
+ 2b6:	0f b6       	in	r0, 0x3f	; 63
+ 2b8:	0f 92       	push	r0
+ 2ba:	11 24       	eor	r1, r1
+ 2bc:	2f 93       	push	r18
+ 2be:	3f 93       	push	r19
+ 2c0:	4f 93       	push	r20
+ 2c2:	5f 93       	push	r21
+ 2c4:	6f 93       	push	r22
+ 2c6:	7f 93       	push	r23
+ 2c8:	8f 93       	push	r24
+ 2ca:	9f 93       	push	r25
+ 2cc:	af 93       	push	r26
+ 2ce:	bf 93       	push	r27
+ 2d0:	ef 93       	push	r30
+ 2d2:	ff 93       	push	r31
+	PWM_soft_Update();
+ 2d4:	0e 94 42 01 	call	0x284	; 0x284 <PWM_soft_Update>
+}
+ 2d8:	ff 91       	pop	r31
+ 2da:	ef 91       	pop	r30
+ 2dc:	bf 91       	pop	r27
+ 2de:	af 91       	pop	r26
+ 2e0:	9f 91       	pop	r25
+ 2e2:	8f 91       	pop	r24
+ 2e4:	7f 91       	pop	r23
+ 2e6:	6f 91       	pop	r22
+ 2e8:	5f 91       	pop	r21
+ 2ea:	4f 91       	pop	r20
+ 2ec:	3f 91       	pop	r19
+ 2ee:	2f 91       	pop	r18
+ 2f0:	0f 90       	pop	r0
+ 2f2:	0f be       	out	0x3f, r0	; 63
+ 2f4:	0f 90       	pop	r0
+ 2f6:	1f 90       	pop	r1
+ 2f8:	18 95       	reti
+
+000002fa <setupTimer2CTC>:
 	}
 }
 
-// Interrupción del Timer1 para el PWM por Soft
-ISR(TIMER1_COMPA_vect) {
- 25c:	1f 92       	push	r1
- 25e:	0f 92       	push	r0
- 260:	0f b6       	in	r0, 0x3f	; 63
- 262:	0f 92       	push	r0
- 264:	11 24       	eor	r1, r1
- 266:	2f 93       	push	r18
- 268:	3f 93       	push	r19
- 26a:	4f 93       	push	r20
- 26c:	5f 93       	push	r21
- 26e:	6f 93       	push	r22
- 270:	7f 93       	push	r23
- 272:	8f 93       	push	r24
- 274:	9f 93       	push	r25
- 276:	af 93       	push	r26
- 278:	bf 93       	push	r27
- 27a:	ef 93       	push	r30
- 27c:	ff 93       	push	r31
-	PWM_soft_Update();
- 27e:	0e 94 15 01 	call	0x22a	; 0x22a <PWM_soft_Update>
+void setupTimer2CTC() {
+	// Configurar Timer1 en modo CTC con prescaler 256
+	TCCR2A |= (1 << WGM01); // Seteo Modo CTC
+ 2fa:	e0 eb       	ldi	r30, 0xB0	; 176
+ 2fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 2fe:	80 81       	ld	r24, Z
+ 300:	82 60       	ori	r24, 0x02	; 2
+ 302:	80 83       	st	Z, r24
+	TCCR2B |= (1 << CS02); // Prescaler 256
+ 304:	e1 eb       	ldi	r30, 0xB1	; 177
+ 306:	f0 e0       	ldi	r31, 0x00	; 0
+ 308:	80 81       	ld	r24, Z
+ 30a:	84 60       	ori	r24, 0x04	; 4
+ 30c:	80 83       	st	Z, r24
+	OCR2A = 120; // Interrupción cada 2 ms (500Hz)
+ 30e:	88 e7       	ldi	r24, 0x78	; 120
+ 310:	80 93 b3 00 	sts	0x00B3, r24	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+ 314:	e0 e7       	ldi	r30, 0x70	; 112
+ 316:	f0 e0       	ldi	r31, 0x00	; 0
+ 318:	80 81       	ld	r24, Z
+ 31a:	82 60       	ori	r24, 0x02	; 2
+ 31c:	80 83       	st	Z, r24
+ 31e:	08 95       	ret
+
+00000320 <__vector_7>:
 }
- 282:	ff 91       	pop	r31
- 284:	ef 91       	pop	r30
- 286:	bf 91       	pop	r27
- 288:	af 91       	pop	r26
- 28a:	9f 91       	pop	r25
- 28c:	8f 91       	pop	r24
- 28e:	7f 91       	pop	r23
- 290:	6f 91       	pop	r22
- 292:	5f 91       	pop	r21
- 294:	4f 91       	pop	r20
- 296:	3f 91       	pop	r19
- 298:	2f 91       	pop	r18
- 29a:	0f 90       	pop	r0
- 29c:	0f be       	out	0x3f, r0	; 63
- 29e:	0f 90       	pop	r0
- 2a0:	1f 90       	pop	r1
- 2a2:	18 95       	reti
 
-000002a4 <_exit>:
- 2a4:	f8 94       	cli
+// Interrupción del Timer2 para la mef
+ISR(TIMER2_COMPA_vect) {
+ 320:	1f 92       	push	r1
+ 322:	0f 92       	push	r0
+ 324:	0f b6       	in	r0, 0x3f	; 63
+ 326:	0f 92       	push	r0
+ 328:	11 24       	eor	r1, r1
+ 32a:	2f 93       	push	r18
+ 32c:	3f 93       	push	r19
+ 32e:	4f 93       	push	r20
+ 330:	5f 93       	push	r21
+ 332:	6f 93       	push	r22
+ 334:	7f 93       	push	r23
+ 336:	8f 93       	push	r24
+ 338:	9f 93       	push	r25
+ 33a:	af 93       	push	r26
+ 33c:	bf 93       	push	r27
+ 33e:	ef 93       	push	r30
+ 340:	ff 93       	push	r31
+	if(++fader>=250){
+ 342:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <fader>
+ 346:	8f 5f       	subi	r24, 0xFF	; 255
+ 348:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <fader>
+ 34c:	8a 3f       	cpi	r24, 0xFA	; 250
+ 34e:	10 f0       	brcs	.+4      	; 0x354 <__vector_7+0x34>
+		fader = 0;
+ 350:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <fader>
+	}
+	setRGBColor(); // Alterar el estado del LED
+ 354:	0e 94 b2 00 	call	0x164	; 0x164 <setRGBColor>
+ 358:	ff 91       	pop	r31
+ 35a:	ef 91       	pop	r30
+ 35c:	bf 91       	pop	r27
+ 35e:	af 91       	pop	r26
+ 360:	9f 91       	pop	r25
+ 362:	8f 91       	pop	r24
+ 364:	7f 91       	pop	r23
+ 366:	6f 91       	pop	r22
+ 368:	5f 91       	pop	r21
+ 36a:	4f 91       	pop	r20
+ 36c:	3f 91       	pop	r19
+ 36e:	2f 91       	pop	r18
+ 370:	0f 90       	pop	r0
+ 372:	0f be       	out	0x3f, r0	; 63
+ 374:	0f 90       	pop	r0
+ 376:	1f 90       	pop	r1
+ 378:	18 95       	reti
 
-000002a6 <__stop_program>:
- 2a6:	ff cf       	rjmp	.-2      	; 0x2a6 <__stop_program>
+0000037a <_exit>:
+ 37a:	f8 94       	cli
+
+0000037c <__stop_program>:
+ 37c:	ff cf       	rjmp	.-2      	; 0x37c <__stop_program>

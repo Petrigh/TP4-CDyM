@@ -2,14 +2,15 @@
 
 void initADC() {
 	// Configurar el pin del LED como salida.
-	DDRB |= (1 << DDB5);
+	//DDRB |= (1 << DDB5);
+	
+	// Habilitar el ADC y configurar el preescalador a 64 (125 kHz a 8 MHz de frecuencia de reloj).
+	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (0 << ADPS0);
 	
 	// Configurar la referencia de voltaje del ADC a AVCC con ajuste a la izquierda.
 	ADMUX |=  (0 << REFS1) | (1 << REFS0);
 	ADMUX &= ~(1 << ADLAR);
 
-	// Habilitar el ADC y configurar el preescalador a 64 (125 kHz a 8 MHz de frecuencia de reloj).
-	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (0 << ADPS0);
 }
 
 uint16_t leerADC_canal3() {

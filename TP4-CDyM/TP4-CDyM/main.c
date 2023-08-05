@@ -1,24 +1,24 @@
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "PWM.h"
 #include "ADC.h"
+#define F_CPU 16000000UL
 
 int main(void)
 {	
-	uint16_t valorLDR;
 	initADC();
 	setupPWM();
-	setupTimer1CTC(1562);  //1562 = 2seg parpadeo; 3905 = 5seg parpadeo;
+	setupTimer0CTC();
+	setupTimer2CTC();
 	sei();
 	
 	while (1)
-	{	
+	{
 		valorLDR = leerADC_canal3();
-		if (valorLDR == 1024){
-			setupTimer1CTC(3905);
+		if (valorLDR <= 1000){
+			haltTop = 1; // 2 seg
 		} else {
-			setupTimer1CTC(1562);
+			haltTop = 6; // 5 seg
 		}
-		//si ADC detecta Luz minima (tapado) ==> setupTimer1CTC(3905);
-		//si ADC detecta Luz ambiente (destapado) ==> setupTimer1CTC(1562);
 	}
 }

@@ -1,93 +1,142 @@
 #include "PWM.h"
 
-#define REDSHADE 0x17
-#define GREENSHADE 0x02
-#define BLUESHADE 0x0C
-#define PWM_PERIO 240
-#define PWM_OFF PORTB &=~(1<<PORTB1)
-#define PWM_ON PORTB |=(1<<PORTB1)
-#define PWM_START DDRB |=(1<<PORTB1)
+#define REDSHADE 0x00
+#define GREENSHADE 0x01
+#define BLUESHADE 0x00
+#define PWM_PERDIOD 255
+#define PWM_ON PORTB &=~(1<<PORTB5)
+#define PWM_OFF PORTB |=(1<<PORTB5)
+#define PWM_START DDRB |=(1<<PORTB5)
+typedef enum {UP, HOLD, DOWN, OFF} state;
 
 
-static uint8_t PWM_DELTA = 0;
+uint8_t fader = 0;
+uint8_t count = 0;
+state stateFlag;
+volatile static uint8_t PWM_DELTA = 0x00;
 volatile uint8_t ocrValue = 0;
 volatile uint8_t adjustLED = 0;
-
+void PWM_soft_Update(void);
 
 void setupPWM() {
-	// Configuración para Timer0 canal A (LED rojo) y canal B (LED verde)
-	DDRD |= (1 << PORTD6) | (1 << PORTD5); //Canal OCR0A y OCR0B
-	OCR0A = 0x00;
-	OCR0B = 0x00;
-	TCCR0A |= (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0A0) | (1 << COM0B1) | (1 << COM0B0); // Modo PWM invertido de 8 bits, Fast PWM en OC0A y OC0B
-	TCCR0B |= (1 << CS02); // preescalador de 256; frecuencia de 122Hz
+	// Configuración para Timer1 canal A (LED azul) y canal B (LED verde)
+	DDRB |= (1 << PORTB1) | (1 << PORTB2); //Canal OCR0A y OCR0B
+	OCR1A = 0xFF; //Arranca apagado
+	OCR1B = 0xFF; //Arranca apagado
+	TCCR1A |= (1 << WGM10) | (1 << WGM10) | (1 << COM1A1) | (1 << COM1B1); // Modo PWM no-invertido de 8 bits en OC1A y OC1B
+	TCCR1B |= (1 << WGM12) | (1 << CS12); // preescalador de 256; frecuencia de 122Hz
+	//configuracion Mef
+	stateFlag = UP;
+	haltTop = 1;
 	//Setup del PWM por soft
 	PWM_START;
 	PWM_OFF;
-
 }
 
-void setRGBColor() {
-	if (adjustLED <= 20){ //Se prende
-		// Ajustar brillo del LED rojo
-		ocrValue = OCR0A + REDSHADE;
-		OCR0A = ocrValue;
-
-		// Ajustar brillo del LED verde
-		ocrValue = OCR0A + GREENSHADE;
-		OCR0B = ocrValue;
+void setRGBColor() {	
+	switch(stateFlag){
+		case UP:
+			
+			// Ajustar brillo del LED azul
+			ocrValue = OCR1A - BLUESHADE;
+			OCR1A = ocrValue;
+			// Ajustar brillo del LED verde
+			ocrValue = OCR1B - GREENSHADE;
+			OCR1B = ocrValue;
+			// Ajustar brillo del LED rojo
+			PWM_DELTA -= REDSHADE;
+			
+			if(!fader){
+				stateFlag = HOLD;
+			}
+		break;
 		
-		// Ajustar brillo del LED azul
-		PWM_DELTA += BLUESHADE;
-	}else{ //Se apaga
-		// Ajustar brillo del LED rojo
-		ocrValue = OCR0A - REDSHADE;
-		OCR0A = ocrValue;
-
-		// Ajustar brillo del LED verde
-		ocrValue = OCR0A - GREENSHADE;
-		OCR0B = ocrValue;
-
-		// Ajustar brillo del LED azul
-		PWM_DELTA -= BLUESHADE;
+		case HOLD:
+			if(!fader){
+				if(++count == 2){
+					stateFlag = DOWN;
+					count=0;
+				}
+			}
+		break;
+		
+		case DOWN:
+			
+			
+			// Ajustar brillo del LED azul
+			ocrValue = OCR1A + BLUESHADE;
+			OCR1A = ocrValue;
+			// Ajustar brillo del LED verde
+			ocrValue = OCR1B + GREENSHADE;
+			OCR1B = ocrValue;
+			// Ajustar brillo del LED rojo
+			PWM_DELTA += REDSHADE;
+			
+			
+			if(!fader){
+				stateFlag = OFF;
+			}
+		break;
+		
+		case OFF:
+		
+				//TCCR0B &= ~(1<<CS02); //apago Timer0
+				TCCR1B &= ~(1<<CS12); //apago Timer1
+				PORTB |= (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5); //Enciendo LEDs
+			
+			if(!fader){
+				if(++count == haltTop){
+					stateFlag = UP;
+					count = 0;
+					//TCCR0B |= (1<<CS02); //Enciendo Timer0
+					TCCR1B |= (1<<CS12); //Enciendo Timer1
+					PORTB &= ~(1<<PORTB1) & ~(1<<PORTB2) & ~(1<<PORTB5); //Apago LEDs
+				}
+			}
+		break;
 	}
 }
 
-void setupTimer1CTC(uint16_t outputCompare) { //outputCompare -> 1562 = 50ms; 3905 = 125ms;
+void setupTimer0CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
-	TCCR1A = 0; // Desactivar las salidas en modo CTC
-	TCCR1B |= (1 << WGM12) | (1 << CS12); // Modo CTC con prescaler 256
-	OCR1B = outputCompare; // Interrupción cada 50 ms o cada 125 ms
-	OCR1A = 499; // Interrupción cada 16 ms (60Hz)
-	TIMSK1 |= (1 << OCIE1B) | (1 << OCIE1A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+	TCCR0A |= (1 << WGM01); // Seteo Modo CTC
+	TCCR0B |= (1 << CS02); // Prescaler 256
+	OCR0A = 120; // Interrupción cada 2 ms (500Hz)
+	TIMSK0 |= (1 << OCIE0A) ;//| (1 << OCIE0A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
 }
 
-// Interrupción del Timer1 (CTC)
-ISR(TIMER1_COMPB_vect) {
-	adjustLED++;
-	setRGBColor(); // Alterar el estado del LED
-	if(adjustLED>=40){
-		adjustLED=0;
-	}
-}
-
-// Interrupción del Timer1 para el PWM por Soft
-ISR(TIMER1_COMPA_vect) {
+// Interrupción del Timer0 para el PWM por Soft
+ISR(TIMER0_COMPA_vect) {
 	PWM_soft_Update();
 }
 
 //PWM por Software
 void PWM_soft_Update(void){
-	static uint8_t PWM_position = 0;
+	volatile	static uint8_t PWM_position = 0;
 	
-	if(++PWM_position>=PWM_DELTA){
+	if(++PWM_position>=PWM_PERDIOD){
 		PWM_position=0;
-		PWM_OFF;
-	}else{
-		if(PWM_position<PWM_DELTA){
-			PWM_ON;
-		}else{
+		PWM_ON;
+	}
+	else{
+		if(PWM_position > PWM_DELTA){
 			PWM_OFF;
 		}
 	}
+}
+
+void setupTimer2CTC() {
+	// Configurar Timer1 en modo CTC con prescaler 256
+	TCCR2A |= (1 << WGM01); // Seteo Modo CTC
+	TCCR2B |= (1 << CS02); // Prescaler 256
+	OCR2A = 120; // Interrupción cada 2 ms (500Hz)
+	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+}
+
+// Interrupción del Timer2 para la mef
+ISR(TIMER2_COMPA_vect) {
+	if(++fader>=250){
+		fader = 0;
+	}
+	setRGBColor(); // Alterar el estado del LED
 }

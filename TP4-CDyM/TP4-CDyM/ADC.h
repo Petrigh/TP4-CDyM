@@ -11,6 +11,7 @@
 void initADC(void); // Función para inicializar el ADC.
 
 uint16_t leerADC_canal3(void); // Función para leer el valor del ADC en el canal 3.
+uint16_t valorLDR;
 
 
 #endif /* ADC_H_ */

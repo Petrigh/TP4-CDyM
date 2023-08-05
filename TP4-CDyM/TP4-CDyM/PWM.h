@@ -7,6 +7,9 @@
 #include <avr/interrupt.h>
 
 void setupPWM(void);
-void setupTimer1CTC(uint16_t);
+void setupTimer0CTC();
+void setupTimer2CTC();
+
+uint8_t haltTop;
 
 #endif /* PWM_H_ */
