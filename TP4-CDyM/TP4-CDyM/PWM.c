@@ -1,9 +1,9 @@
 #include "PWM.h"
 
-#define REDSHADE 0x00
-#define GREENSHADE 0x01
+#define REDSHADE 0x01
+#define GREENSHADE 0x00
 #define BLUESHADE 0x00
-#define PWM_PERDIOD 255
+#define PWM_PERDIOD 250
 #define PWM_ON PORTB &=~(1<<PORTB5)
 #define PWM_OFF PORTB |=(1<<PORTB5)
 #define PWM_START DDRB |=(1<<PORTB5)
@@ -13,7 +13,7 @@ typedef enum {UP, HOLD, DOWN, OFF} state;
 uint8_t fader = 0;
 uint8_t count = 0;
 state stateFlag;
-volatile static uint8_t PWM_DELTA = 0x00;
+volatile uint16_t PWM_DELTA = 0x00FF;
 volatile uint8_t ocrValue = 0;
 volatile uint8_t adjustLED = 0;
 void PWM_soft_Update(void);
@@ -99,38 +99,40 @@ void setRGBColor() {
 
 void setupTimer0CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
-	TCCR0A |= (1 << WGM01); // Seteo Modo CTC
-	TCCR0B |= (1 << CS02); // Prescaler 256
-	OCR0A = 120; // Interrupción cada 2 ms (500Hz)
-	TIMSK0 |= (1 << OCIE0A) ;//| (1 << OCIE0A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+	TCCR0A = 0;  // Modo normal de operación
+	TCCR0B = (1 << CS02); // Prescaler 256
+	TCNT0 = 0;   // Inicializar el contador en 0
+	OCR0A = 63;  // Interrupción cada 4 ms (250Hz)
+	TIMSK0 = (1 << OCIE0A); // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software)
 }
+
 
 // Interrupción del Timer0 para el PWM por Soft
 ISR(TIMER0_COMPA_vect) {
 	PWM_soft_Update();
 }
 
+
+
 //PWM por Software
 void PWM_soft_Update(void){
-	volatile	static uint8_t PWM_position = 0;
-	
-	if(++PWM_position>=PWM_PERDIOD){
-		PWM_position=0;
-		PWM_ON;
+	static uint16_t count = 0;
+	if (count < PWM_DELTA) {
+		PWM_ON; // Establecer el pin en estado alto
+	} else {
+		PWM_OFF; // Establecer el pin en estado bajo
 	}
-	else{
-		if(PWM_position > PWM_DELTA){
-			PWM_OFF;
-		}
-	}
+	count = (count + 1) % 256; // Contador circular de 0 a 255
 }
+
+
 
 void setupTimer2CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
 	TCCR2A |= (1 << WGM01); // Seteo Modo CTC
 	TCCR2B |= (1 << CS02); // Prescaler 256
-	OCR2A = 120; // Interrupción cada 2 ms (500Hz)
-	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer1 Canal A (PWM software), Canal B (Interrupcion periodica)
+	OCR2A = 240; // Interrupción cada 4 ms (250Hz)
+	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer2 Canal A (Interrupcion periodica)
 }
 
 // Interrupción del Timer2 para la mef

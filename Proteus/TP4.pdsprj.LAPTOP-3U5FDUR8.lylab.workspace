@@ -67,7 +67,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="16" x="178" flags="80000000" y="269" h="32" pid="14" iid="1">
+   <POPUP w="16" x="178" flags="00000000" y="269" h="32" pid="14" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -99,7 +99,7 @@
    </POPUP>
    <POPUP w="600" x="0" flags="0000002a" y="82" h="646" pid="1" iid="1">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"setRGBColor",0252,00EE,6D9F,0777,1
+     <ITEM name="Breakpoint 0">"setRGBColor",0268,00EE,6D9F,0777,-1
 </ITEM>
      <ITEM name="Breakpoint 1">"PWM_soft_Update",029A,0000,839D,0777,-1
 </ITEM>
