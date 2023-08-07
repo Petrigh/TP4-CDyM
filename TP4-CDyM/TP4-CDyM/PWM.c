@@ -1,8 +1,8 @@
 #include "PWM.h"
 
-#define REDSHADE 0x066
-#define GREENSHADE 0x66
-#define BLUESHADE 0x66
+#define REDSHADE 0x66
+#define GREENSHADE 0x33
+#define BLUESHADE 0xAA
 #define PASO 250
 #define PWM_ON PORTB &=~(1<<PORTB5)
 #define PWM_OFF PORTB |=(1<<PORTB5)
@@ -163,7 +163,7 @@ void setupTimer2CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
 	TCCR2A |= (1 << WGM21); // Seteo Modo CTC
 	TCCR2B |= (1 << CS22); // Prescaler 256
-	OCR2A = 240; // Interrupción cada 2 ms (500Hz)
+	OCR2A = 119; // Interrupción cada 2 ms (500Hz)
 	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer2 Canal A (Interrupcion periodica)
 }
 
