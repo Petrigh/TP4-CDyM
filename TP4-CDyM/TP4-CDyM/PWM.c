@@ -1,8 +1,8 @@
 #include "PWM.h"
 
-#define REDSHADE 0x88
-#define GREENSHADE 0xBB
-#define BLUESHADE 0x55
+#define REDSHADE 0xFF
+#define GREENSHADE 0x66
+#define BLUESHADE 0xFF
 #define PASO 250
 #define PWM_ON PORTB &=~(1<<PORTB5)
 #define PWM_OFF PORTB |=(1<<PORTB5)
