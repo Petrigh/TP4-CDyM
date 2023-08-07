@@ -1,16 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffffb90000000c000000c7060000f0030000</PLACEMENT>
+  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffffb90000000c000000c7060000f0030000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="38" flags="00000002" y="129" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="38" flags="00000003" y="129" h="200" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">663</ITEM>
+     <ITEM name="Message Column Width">542</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
+     <ITEM name="Time Column Width">120</ITEM>
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
@@ -31,10 +32,10 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1384" x="281" flags="00000000" y="118" h="877" pid="0" iid="12">
+   <POPUP w="1384" x="458" flags="00008001" y="155" h="877" pid="0" iid="12">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="30" x="98" flags="00000008" y="189" h="16" pid="3" iid="1">
+   <POPUP w="226" x="98" flags="00000008" y="189" h="215" pid="3" iid="1">
     <PROPERTIES/>
    </POPUP>
    <POPUP w="8" x="118" flags="0000000a" y="209" h="1" pid="10" iid="1">
@@ -97,28 +98,18 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="0" flags="0000002a" y="82" h="646" pid="1" iid="1">
+   <POPUP w="600" x="238" flags="0000002a" y="329" h="400" pid="1" iid="1">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"setRGBColor",0268,00EE,6D9F,0777,-1
-</ITEM>
-     <ITEM name="Breakpoint 1">"PWM_soft_Update",029A,0000,839D,0777,-1
-</ITEM>
-     <ITEM name="Breakpoint 2">"PWM_soft_Update",02A8,000E,1389,0777,-1
-</ITEM>
-     <ITEM name="Breakpoint 3">"PWM_soft_Update",02B4,001A,B76A,0777,-1
-</ITEM>
-     <ITEM name="Breakpoint 4">"PWM_soft_Update",02C0,0026,AD35,0777,1
-</ITEM>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
      <ITEM name="DISPLNUMS">No</ITEM>
      <ITEM name="DISPOPCODES">No</ITEM>
      <ITEM name="FIXUPBPTS">Yes</ITEM>
      <ITEM name="WordsOnly">No</ITEM>
-     <ITEM name="nBreakpoints">1</ITEM>
+     <ITEM name="nBreakpoints">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="800" x="1068" flags="0000000a" y="253" h="699" pid="2" iid="1">
+   <POPUP w="300" x="258" flags="0000000a" y="349" h="300" pid="2" iid="1">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>

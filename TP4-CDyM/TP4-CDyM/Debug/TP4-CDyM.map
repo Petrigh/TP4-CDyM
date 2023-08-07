@@ -10,6 +10,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+ocrValue            0x1               PWM.o
 haltTop             0x1               main.o
 stateFlag           0x1               PWM.o
 valorLDR            0x2               ADC.o
@@ -27,8 +28,6 @@ Discarded input sections
  .text          0x00000000        0x0 PWM.o
  .data          0x00000000        0x0 PWM.o
  .bss           0x00000000        0x0 PWM.o
- .bss.adjustLED
-                0x00000000        0x1 PWM.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -206,7 +205,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3be
+.text           0x00000000      0x414
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -302,28 +301,28 @@ END GROUP
                 0x00000134       0x46 PWM.o
                 0x00000134                setupPWM
  .text.setRGBColor
-                0x0000017a      0x12a PWM.o
+                0x0000017a      0x180 PWM.o
                 0x0000017a                setRGBColor
  .text.setupTimer0CTC
-                0x000002a4       0x14 PWM.o
-                0x000002a4                setupTimer0CTC
+                0x000002fa       0x14 PWM.o
+                0x000002fa                setupTimer0CTC
  .text.PWM_soft_Update
-                0x000002b8       0x3a PWM.o
-                0x000002b8                PWM_soft_Update
+                0x0000030e       0x3a PWM.o
+                0x0000030e                PWM_soft_Update
  .text.__vector_14
-                0x000002f2       0x48 PWM.o
-                0x000002f2                __vector_14
+                0x00000348       0x48 PWM.o
+                0x00000348                __vector_14
  .text.setupTimer2CTC
-                0x0000033a       0x26 PWM.o
-                0x0000033a                setupTimer2CTC
+                0x00000390       0x26 PWM.o
+                0x00000390                setupTimer2CTC
  .text.__vector_7
-                0x00000360       0x5a PWM.o
-                0x00000360                __vector_7
-                0x000003ba                . = ALIGN (0x2)
+                0x000003b6       0x5a PWM.o
+                0x000003b6                __vector_7
+                0x00000410                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000003ba        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000003ba                _exit
-                0x000003ba                exit
+ .fini9         0x00000410        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000410                _exit
+                0x00000410                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -342,53 +341,70 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000003ba        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000410        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003be                _etext = .
+                0x00000414                _etext = .
 
-.data           0x00800100        0x2 load address 0x000003be
+.data           0x00800100        0x8 load address 0x00000414
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.pasoVerde
+                0x00800100        0x1 PWM.o
+                0x00800100                pasoVerde
+ .data.pasoAzul
+                0x00800101        0x1 PWM.o
+                0x00800101                pasoAzul
+ .data.pasoRojo
+                0x00800102        0x1 PWM.o
+                0x00800102                pasoRojo
+ .data.intensidadVerde
+                0x00800103        0x1 PWM.o
+                0x00800103                intensidadVerde
+ .data.intensidadAzul
+                0x00800104        0x1 PWM.o
+                0x00800104                intensidadAzul
+ .data.intensidadRoja
+                0x00800105        0x1 PWM.o
+                0x00800105                intensidadRoja
  .data.PWM_DELTA
-                0x00800100        0x2 PWM.o
-                0x00800100                PWM_DELTA
+                0x00800106        0x2 PWM.o
+                0x00800106                PWM_DELTA
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x00800102                . = ALIGN (0x2)
-                0x00800102                _edata = .
-                0x00800102                PROVIDE (__data_end, .)
+                0x00800108                . = ALIGN (0x2)
+                0x00800108                _edata = .
+                0x00800108                PROVIDE (__data_end, .)
 
-.bss            0x00800102        0x9
-                0x00800102                PROVIDE (__bss_start, .)
+.bss            0x00800108        0x9
+                0x00800108                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.pwm_position.1639
-                0x00800102        0x2 PWM.o
- .bss.ocrValue  0x00800104        0x1 PWM.o
-                0x00800104                ocrValue
- .bss.count     0x00800105        0x1 PWM.o
-                0x00800105                count
- .bss.fader     0x00800106        0x1 PWM.o
-                0x00800106                fader
+ .bss.pwm_position.1644
+                0x00800108        0x2 PWM.o
+ .bss.count     0x0080010a        0x1 PWM.o
+                0x0080010a                count
+ .bss.fader     0x0080010b        0x1 PWM.o
+                0x0080010b                fader
  *(COMMON)
- COMMON         0x00800107        0x2 ADC.o
-                0x00800107                valorLDR
- COMMON         0x00800109        0x1 main.o
-                0x00800109                haltTop
- COMMON         0x0080010a        0x1 PWM.o
-                0x0080010a                stateFlag
-                0x0080010b                PROVIDE (__bss_end, .)
-                0x000003be                __data_load_start = LOADADDR (.data)
-                0x000003c0                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080010c        0x2 ADC.o
+                0x0080010c                valorLDR
+ COMMON         0x0080010e        0x1 main.o
+                0x0080010e                haltTop
+ COMMON         0x0080010f        0x2 PWM.o
+                0x0080010f                ocrValue
+                0x00800110                stateFlag
+                0x00800111                PROVIDE (__bss_end, .)
+                0x00000414                __data_load_start = LOADADDR (.data)
+                0x0000041c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080010b        0x0
+.noinit         0x00800111        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080010b                _end = .
+                0x00800111                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -467,12 +483,12 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xa00
+.debug_info     0x00000000      0xa5f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4       0xea ADC.o
  .debug_info    0x000006de      0x12a main.o
- .debug_info    0x00000808      0x1f8 PWM.o
+ .debug_info    0x00000808      0x257 PWM.o
 
 .debug_abbrev   0x00000000      0x7b2
  *(.debug_abbrev)
@@ -481,12 +497,12 @@ END GROUP
  .debug_abbrev  0x0000063e       0x86 main.o
  .debug_abbrev  0x000006c4       0xee PWM.o
 
-.debug_line     0x00000000      0x56a
+.debug_line     0x00000000      0x59a
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134       0xfd ADC.o
  .debug_line    0x00000231       0xe1 main.o
- .debug_line    0x00000312      0x258 PWM.o
+ .debug_line    0x00000312      0x288 PWM.o
 
 .debug_frame    0x00000000      0x16c
  *(.debug_frame)
@@ -494,15 +510,15 @@ END GROUP
  .debug_frame   0x00000034       0x24 main.o
  .debug_frame   0x00000058      0x114 PWM.o
 
-.debug_str      0x00000000      0x44a
+.debug_str      0x00000000      0x48a
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x174 ADC.o
                                 0x1a8 (size before relaxing)
  .debug_str     0x0000037c       0x40 main.o
                                 0x1c3 (size before relaxing)
- .debug_str     0x000003bc       0x8e PWM.o
-                                0x220 (size before relaxing)
+ .debug_str     0x000003bc       0xce PWM.o
+                                0x260 (size before relaxing)
 
 .debug_loc      0x00000000      0x1c4
  *(.debug_loc)
