@@ -1,7 +1,7 @@
 #include "PWM.h"
 
-#define REDSHADE 0x00
-#define GREENSHADE 0xFF
+#define REDSHADE 0x066
+#define GREENSHADE 0x66
 #define BLUESHADE 0x66
 #define PASO 250
 #define PWM_ON PORTB &=~(1<<PORTB5)
@@ -99,9 +99,9 @@ void setRGBColor() {
 			TCCR1B &= ~(1<<CS12); //Apago Timer1
 			PORTB |= (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5); //Apago LEDs
 			
-			if(!fader){
-				switch(duracionApagado){
-					case LONG:
+			switch(duracionApagado){
+				case LONG:
+					if(!fader){
 						if(++count == 6){
 							count = 0;
 							stateFlag = UP;
@@ -109,22 +109,22 @@ void setRGBColor() {
 							TCCR1B |= (1<<CS12); //Enciendo Timer1
 							PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
 						}
-					break;
-					case SHORT:
-						count = 0;
-						stateFlag = UP;
-						TCCR0B |= (1<<CS01); //Enciendo Timer0
-						TCCR1B |= (1<<CS12); //Enciendo Timer1
-						PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
-					break;
-					default:
-						count = 0;
-						stateFlag = UP;
-						TCCR0B |= (1<<CS01); //Enciendo Timer0
-						TCCR1B |= (1<<CS12); //Enciendo Timer1
-						PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
-					break;
-				}
+					}
+				break;
+				case SHORT:
+					count = 0;
+					stateFlag = UP;
+					TCCR0B |= (1<<CS01); //Enciendo Timer0
+					TCCR1B |= (1<<CS12); //Enciendo Timer1
+					PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+				break;
+				default:
+					count = 0;
+					stateFlag = UP;
+					TCCR0B |= (1<<CS01); //Enciendo Timer0
+					TCCR1B |= (1<<CS12); //Enciendo Timer1
+					PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+				break;
 			}
 		break;
 	}
