@@ -16,9 +16,9 @@ int main(void)
 	{
 		valorLDR = leerADC_canal3();
 		if (valorLDR <= 1000){
-			haltTop = 1; // 2 seg
+			duracionApagado = LONG; // 2 seg
 		} else {
-			haltTop = 6; // 5 seg
+			duracionApagado = SHORT; // 5 seg
 		}
 	}
 }

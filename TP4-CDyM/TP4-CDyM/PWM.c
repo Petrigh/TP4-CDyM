@@ -1,8 +1,8 @@
 #include "PWM.h"
 
-#define REDSHADE 0xFF
-#define GREENSHADE 0x66
-#define BLUESHADE 0xFF
+#define REDSHADE 0x00
+#define GREENSHADE 0xFF
+#define BLUESHADE 0x66
 #define PASO 250
 #define PWM_ON PORTB &=~(1<<PORTB5)
 #define PWM_OFF PORTB |=(1<<PORTB5)
@@ -33,7 +33,7 @@ void setupPWM() {
 	TCCR1B |= (1 << WGM12) | (1 << CS12); // preescalador de 256; frecuencia de 122Hz
 	//configuracion Mef
 	stateFlag = UP;
-	haltTop = 1;
+	duracionApagado = SHORT;
 	//Setup del PWM por soft
 	PWM_START;
 	PWM_OFF;
@@ -100,12 +100,30 @@ void setRGBColor() {
 			PORTB |= (1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5); //Apago LEDs
 			
 			if(!fader){
-				if(++count == haltTop){
-					count = 0;
-					stateFlag = UP;
-					TCCR0B |= (1<<CS01); //Enciendo Timer0
-					TCCR1B |= (1<<CS12); //Enciendo Timer1
-					PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+				switch(duracionApagado){
+					case LONG:
+						if(++count == 6){
+							count = 0;
+							stateFlag = UP;
+							TCCR0B |= (1<<CS01); //Enciendo Timer0
+							TCCR1B |= (1<<CS12); //Enciendo Timer1
+							PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+						}
+					break;
+					case SHORT:
+						count = 0;
+						stateFlag = UP;
+						TCCR0B |= (1<<CS01); //Enciendo Timer0
+						TCCR1B |= (1<<CS12); //Enciendo Timer1
+						PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+					break;
+					default:
+						count = 0;
+						stateFlag = UP;
+						TCCR0B |= (1<<CS01); //Enciendo Timer0
+						TCCR1B |= (1<<CS12); //Enciendo Timer1
+						PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB5)); //Enciendo LEDs
+					break;
 				}
 			}
 		break;
@@ -145,7 +163,7 @@ void setupTimer2CTC() {
 	// Configurar Timer1 en modo CTC con prescaler 256
 	TCCR2A |= (1 << WGM21); // Seteo Modo CTC
 	TCCR2B |= (1 << CS22); // Prescaler 256
-	OCR2A = 120; // Interrupción cada 2 ms (500Hz)
+	OCR2A = 240; // Interrupción cada 2 ms (500Hz)
 	TIMSK2 |= (1 << OCIE2A) ; // Habilitar la interrupción de comparación de Timer2 Canal A (Interrupcion periodica)
 }
 

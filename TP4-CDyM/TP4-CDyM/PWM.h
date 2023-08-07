@@ -10,6 +10,7 @@ void setupPWM(void);
 void setupTimer0CTC();
 void setupTimer2CTC();
 
-uint8_t haltTop;
+typedef enum {LONG, SHORT} apagado;
+volatile apagado duracionApagado;
 
 #endif /* PWM_H_ */
